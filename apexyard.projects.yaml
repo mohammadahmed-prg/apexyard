@@ -1,0 +1,32 @@
+# =============================================================================
+# ApexYard Portfolio Registry — Hook Leads Org
+# =============================================================================
+# See apexyard.projects.yaml.example for the full schema.
+
+version: 1
+
+projects:
+  - name: hook-leads
+    repo: mohammadahmed-prg/hook-leads
+    workspace: workspace/hook-leads
+    docs: projects/hook-leads
+    status: active
+    tier: P0
+    roles:
+      - tech-lead
+      - backend-engineer
+      - frontend-engineer
+      - qa-engineer
+      - product-manager
+    tags:
+      - customer-facing
+      - revenue
+      - mvp
+    ticket_prefix: GH
+
+defaults:
+  status: active
+  tier: P1
+  ticket_prefix: GH
+  roles:
+    - tech-lead
