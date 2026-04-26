@@ -29,22 +29,22 @@
 # Company Information
 # -----------------------------------------------------------------------------
 company:
-  name: "Your Company Name"
-  mission: "What you're building and why"
-  vision: "Where you're headed long-term"
-  website: "https://yourcompany.com"
+  name: "Hook Leads"
+  mission: "AI-powered lead generation and outreach platform"
+  vision: "Help solo founders and small teams generate qualified leads on autopilot"
+  website: ""
 
   # Core values that guide decision-making
   values:
-    - "Quality over speed"
-    - "Ship and learn"
-    - "Keep it simple"
+    - "Ship fast, learn faster"
+    - "Decisions over documentation (AgDR-first)"
+    - "Lean process, strong fundamentals"
 
   # What kind of software you build
   products:
-    - name: "Main Product"
-      description: "Brief description of what it does"
-      type: "web-app"  # web-app, mobile-app, api, cli, library, saas
+    - name: "Hook Leads"
+      description: "AI-powered lead generation and outreach platform"
+      type: "saas"
 
 # -----------------------------------------------------------------------------
 # Team Structure
@@ -61,26 +61,11 @@ company:
 #   Data:        head-of-data, data-analyst, data-engineer
 #
 team:
-  - name: "Team Lead"
+  # Solo founder — Rafat wears every hat. Roles activate per the trigger
+  # table in .claude/rules/role-triggers.md, but the human is always the same.
+  - name: "Rafat"
     role: "tech-lead"
     department: "engineering"
-
-  - name: "Developer 1"
-    role: "backend-engineer"
-    department: "engineering"
-
-  - name: "Developer 2"
-    role: "frontend-engineer"
-    department: "engineering"
-
-  # Uncomment and add more team members as needed:
-  # - name: "PM"
-  #   role: "product-manager"
-  #   department: "product"
-  #
-  # - name: "Designer"
-  #   role: "ux-designer"
-  #   department: "design"
 
 # -----------------------------------------------------------------------------
 # Tech Stack
@@ -90,13 +75,15 @@ team:
 tech_stack:
   language: "TypeScript"          # Primary language
   runtime: "Node.js"              # Runtime environment
-  framework: "React"              # Frontend framework (React, Vue, Svelte, etc.)
-  backend: "Express"              # Backend framework (Express, Fastify, NestJS, etc.)
+  framework: "Next.js"            # Frontend + backend (App Router)
+  backend: "Next.js API routes"   # Server logic colocated with Next.js
   database: "PostgreSQL"          # Primary database
-  hosting: "AWS"                  # Cloud provider (AWS, GCP, Azure, Vercel, etc.)
+  hosting: "Vercel"               # Cloud provider
   ci_cd: "GitHub Actions"         # CI/CD platform
   testing: "Vitest"               # Test framework
   e2e_testing: "Playwright"       # E2E test framework
+  automation: "n8n"               # Workflow automation
+  ai: "AI APIs"                   # OpenAI / Anthropic / etc.
 
   # Additional tools (uncomment what you use):
   # orm: "Prisma"
@@ -123,11 +110,14 @@ project_management:
 # Quality Standards
 # -----------------------------------------------------------------------------
 quality:
-  # Minimum test coverage percentage
-  test_coverage_target: 80
+  # Minimum test coverage percentage (lean for solo founder speed)
+  test_coverage_target: 70
 
-  # Required approvals before merge
-  required_reviews: 1
+  # Required approvals before merge.
+  # Solo founder: 0 human reviewers. Rex (code-reviewer agent) still
+  # gates every PR, and CEO approval is still required at merge time
+  # via /approve-merge.
+  required_reviews: 0
 
   # Enforce these checks before merge
   required_checks:
@@ -137,7 +127,7 @@ quality:
     - build
 
   # Code review style
-  review_style: "thorough"        # thorough, lightweight, pair-programming
+  review_style: "lightweight"     # thorough, lightweight, pair-programming
 
 # -----------------------------------------------------------------------------
 # Workflows
@@ -146,12 +136,12 @@ quality:
 # Set to false to skip stages that don't apply to your team.
 #
 workflows:
-  require_prd: true               # Require PRD before development
-  require_technical_design: true   # Require tech design before coding
-  require_qa_signoff: true         # Require QA verification before Done
-  require_security_review: false   # Require security review before launch
-  use_feature_flags: false         # Use feature flags for rollouts
-  use_agent_decision_records: true # Track AI agent decisions
+  require_prd: true                # PRD required (Idea → Spec → Ticket → Build)
+  require_technical_design: false  # Lean: AgDR captures decisions instead
+  require_qa_signoff: true         # Solo founder wears the QA hat after merge
+  require_security_review: false   # Skip until handling sensitive data at scale
+  use_feature_flags: false         # Ship straight, revert if needed
+  use_agent_decision_records: true # AgDR-first culture
 
 # -----------------------------------------------------------------------------
 # Communication
@@ -159,6 +149,6 @@ workflows:
 # Where your team communicates (helps Claude know where to suggest updates)
 #
 communication:
-  primary: "Slack"                # Slack, Discord, Teams, etc.
-  documentation: "GitHub Wiki"    # GitHub Wiki, Notion, Confluence, etc.
+  primary: "Solo"                 # Solo founder — no team channel
+  documentation: "GitHub Wiki"    # Lean — only what's needed
   design: "Figma"                 # Figma, Sketch, code-first, etc.
