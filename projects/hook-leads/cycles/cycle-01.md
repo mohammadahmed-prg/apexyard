@@ -42,8 +42,8 @@ Two pre-Build decisions, seven foundation tasks, five US-1 build tasks. **14 ite
 
 | ID | Title | Effort | Output |
 |----|-------|--------|--------|
-| D-001 | AgDR-0004 — Foundation tech stack: App Router, ORM (Prisma vs Drizzle), auth lib (NextAuth vs Lucia), DB host (Neon vs Vercel Postgres vs Supabase) | 1.5 h | `projects/hook-leads/agdr/AgDR-0004-*.md` |
-| D-002 | AgDR-0005 — Transactional email provider for magic-link auth (Resend recommended) | 0.5 h | `projects/hook-leads/agdr/AgDR-0005-*.md` |
+| D-001 | AgDR-0004 — Foundation tech stack: App Router, Drizzle, Neon, Clerk, Vercel | ✅ Done | `projects/hook-leads/agdr/AgDR-0004-foundation-tech-stack.md` |
+| ~~D-002~~ | ~~AgDR-0005 — Transactional email provider~~ — **DEFERRED** out of Cycle 1 (Clerk handles auth emails; no in-product transactional needed in MVP) | — | Revisit when needed |
 
 ### Foundation
 
@@ -51,10 +51,10 @@ Two pre-Build decisions, seven foundation tasks, five US-1 build tasks. **14 ite
 |----|-------|------------|--------|
 | T-001 | Init Next.js 15 + TypeScript + Tailwind in `workspace/hook-leads/` | D-001 | 1 h |
 | T-002 | Database provisioning — Neon Postgres (free tier) project + connection string in `.env` | T-001 | 1 h |
-| T-003 | Prisma init + base schema (`User`, `ICP`, `Lead` skeleton) + first migration | T-002 | 2 h |
-| T-004 | Auth scaffold — NextAuth.js with Resend magic-link adapter; `User` table wired | T-003, D-002 | 5 h |
-| T-005 | Base layout + protected routes + sign-in / sign-out flow + minimal nav | T-004 | 2 h |
-| T-006 | Vercel project + production deploy + env config (DB url, Resend key, NextAuth secret) | T-005 | 1 h |
+| T-003 | Drizzle init + base schema (`ICP`, `Lead` skeleton — `clerk_user_id` as FK, no User table) + first migration | T-002 | 2 h |
+| T-004 | Clerk integration — `@clerk/nextjs` install, env keys, `<ClerkProvider>`, sign-in/sign-up routes, middleware-based protection | T-001 | 0.5 h |
+| T-005 | Base layout + nav + post-auth landing (`/dashboard`) — Clerk's UserButton in header | T-004 | 2 h |
+| T-006 | Vercel project + production deploy + env config (Neon DATABASE_URL, Clerk publishable + secret keys) | T-005 | 1 h |
 | T-007 | GitHub Actions CI — `lint + typecheck + test + build` (matches `onboarding.yaml` required_checks) | T-001 | 1 h |
 
 ### US-1 — Define an ICP (children of HOO-8 / hook-leads#1)
@@ -67,7 +67,7 @@ Two pre-Build decisions, seven foundation tasks, five US-1 build tasks. **14 ite
 | T-011 | Setup-time instrumentation — emit `icp.setup.completed` event with duration, log to Vercel Analytics or simple DB row | T-008 | 1 h |
 | T-012 | US-1 acceptance test + manual QA — automated test for AC, manual walkthrough against PRD ACs | T-008 / T-009 / T-010 / T-011 | 2 h |
 
-**Effort total**: ~26 hours of build + 2 hours of decisions = **28 h** in a 30 h budget. Buffer for unknowns built in.
+**Effort total** (post AgDR-0004): ~22 h of build + 1.5 h of decisions = **~23.5 h** in a 30 h budget. **~6.5 h reclaimed** by switching from NextAuth+Resend to Clerk and deferring AgDR-0005. Use the slack for unknowns or pull a stretch task forward.
 
 ---
 
@@ -75,13 +75,13 @@ Two pre-Build decisions, seven foundation tasks, five US-1 build tasks. **14 ite
 
 | Day | Date | Focus |
 |-----|------|-------|
-| Mon | 2026-04-27 | D-001, D-002, T-001 (init), T-002 (DB) |
-| Tue | 2026-04-28 | T-003 (Prisma + schema), T-004 (auth start) |
-| Wed | 2026-04-29 | T-004 (auth finish), T-005 (layout + protected routes) |
-| Thu | 2026-04-30 | T-006 (Vercel deploy), T-007 (CI), T-008 start (ICP form) |
-| Fri | 2026-05-01 | T-008 finish, T-009 (ICP API) |
-| Sat | 2026-05-02 | T-010 (versioning), T-011 (instrumentation) |
-| Sun | 2026-05-03 | T-012 (QA), buffer, cycle close |
+| Mon | 2026-04-27 | ✅ D-001 done; T-001 init, T-002 DB, T-003 Drizzle + schema |
+| Tue | 2026-04-28 | T-004 Clerk, T-005 layout, T-006 Vercel deploy, T-007 CI |
+| Wed | 2026-04-29 | T-008 ICP form (start) |
+| Thu | 2026-04-30 | T-008 finish, T-009 ICP API |
+| Fri | 2026-05-01 | T-010 versioning, T-011 instrumentation |
+| Sat | 2026-05-02 | T-012 acceptance + QA |
+| Sun | 2026-05-03 | Buffer, cycle close, stretch (US-2 prep for Cycle 2) |
 
 ---
 
@@ -89,8 +89,8 @@ Two pre-Build decisions, seven foundation tasks, five US-1 build tasks. **14 ite
 
 | Risk | Mitigation |
 |------|-----------|
-| NextAuth + magic-link setup eats more than 5 h (Resend domain verification, DKIM, callback URLs) | Bail out to GitHub OAuth as fallback if magic link blocks > 1 day; capture in AgDR-0005 |
-| Prisma + Neon connection-pooling weirdness on Vercel serverless | Use Neon's serverless driver; documented in AgDR-0004 |
+| Clerk dev/prod environment switching trips us up | Document both keys in `.env.local.example`; verify webhook signing on first prod deploy |
+| Drizzle + Neon connection-pooling on Vercel serverless | Use Neon's pooled connection string for runtime, unpooled for migrations; documented in AgDR-0004 |
 | ICP form UX is the user's first impression — risk of over-investing in design vs. shipping | Time-box T-008 to 4 h; ship plain Tailwind form, polish in Cycle 2 if needed |
 | Gate: Tech Design (`require_technical_design: false` in `onboarding.yaml`) — not blocking, but AgDR-0004 covers it | None — by design |
 
