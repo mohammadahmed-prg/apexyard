@@ -5,6 +5,8 @@ agent: claude
 model: claude-opus-4-7
 trigger: user-prompt
 status: executed
+amendments:
+  - 2026-04-27 — Scaffold landed on Next.js **16.2.4** (current GA at scaffold time), not 15. The decision and trade-offs in this AgDR all carry over (App Router, RSC, Turbopack, ecosystem positioning are unchanged between 15 and 16). Treat every "Next.js 15" reference below as "Next.js 16+". Note for agents: `node_modules/next/dist/docs/` is the source of truth for v16-specific APIs and breaking changes — do not rely on training-data assumptions about Next.js. See PR https://github.com/mohammadahmed-prg/hook-leads/pull/21.
 ---
 
 # Foundation tech stack: Next.js App Router + Drizzle + Neon + Clerk + Vercel
