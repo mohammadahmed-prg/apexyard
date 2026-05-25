@@ -39,7 +39,7 @@ Rationale for the narrow MVP segment: closest to the founder building it (faster
 - Full AI-driven qualification bot (manual review for MVP)
 - CRM integrations beyond a CSV export + webhook
 - Vector DB for intent / signals (Phase 2)
-- Multi-tenant teams, role permissions beyond owner
+- Multi-tenant teams **UI** (invite, roles, workspace switcher) — deferred to Phase 2; schema is already workspace-keyed per **AgDR-0008**
 - Custom domains, white-label
 - Self-serve billing portal (Stripe Checkout link is enough for MVP)
 
@@ -143,7 +143,7 @@ Rationale for the narrow MVP segment: closest to the founder building it (faster
 | FR-7 | Reply detection + auto-pause | Must | Inbound email parsing via webhook |
 | FR-8 | Manual qualification UI | Must | MVP: human-in-the-loop, not the AI bot |
 | FR-9 | CSV export + outbound webhook | Must | Webhook signed with HMAC-SHA256 |
-| FR-10 | Auth (email + magic link or OAuth) | Must | Single-user account for MVP |
+| FR-10 | Auth (email + magic link or OAuth) | Must | Single-user UX for MVP; schema workspace-keyed (auto-created personal workspace per user) per AgDR-0008. Team UI is Phase 2. |
 | FR-11 | Stripe checkout for paid plan | Must | One $49/mo plan to start; Should = annual |
 | FR-12 | Multiple ICPs per account | Should | |
 | FR-13 | A/B test outreach copy | Could | Phase 2 |
