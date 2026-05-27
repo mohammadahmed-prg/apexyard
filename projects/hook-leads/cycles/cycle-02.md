@@ -1,6 +1,6 @@
 # Cycle 2 — US-2 (Discover leads) + US-3 (Enrich + score)
 
-**Dates**: 2026-05-25 → 2026-05-31 (Mon → Sun)
+**Dates**: 2026-05-28 → 2026-06-07 (Thu → Sun, ~11 calendar days incl. one weekend)
 **Linear cycle**: HOO Cycle 2
 **Linear project**: [Hook Leads MVP v0.1](https://linear.app/hook-leads/project/hook-leads-mvp-v01-cb6af00da202)
 **Capacity**: ~30 focused hours (solo, ~6 h/day × 5 days, weekend buffer)
@@ -83,13 +83,17 @@ Three artefacts must land before the matching build ticket starts. The hooks enf
 
 | Day | Date | Focus |
 |-----|------|-------|
-| Mon | 2026-05-25 | D-003 AgDR (job runner) + T-013 Apollo client |
-| Tue | 2026-05-26 | D-005 migration AgDR via `/migration` + T-014 migration + T-015 runner |
-| Wed | 2026-05-27 | T-016 POST /api/discovery + T-017 lead persistence |
-| Thu | 2026-05-28 | T-018 discovery UI (full day) |
-| Fri | 2026-05-29 | T-019 US-2 acceptance + close US-2; D-004 AgDR + T-020 verification provider |
-| Sat | 2026-05-30 | T-021 scoring + T-022 classification + T-023 lead list (start) |
-| Sun | 2026-05-31 | T-023 finish + T-024 US-3 acceptance + close US-3 + Cycle 2 retro |
+| Thu | 2026-05-28 | D-003 AgDR (job runner) + T-013 Apollo client |
+| Fri | 2026-05-29 | D-005 migration AgDR via `/migration` + T-014 migration + T-015 runner |
+| Sat | 2026-05-30 | Off |
+| Sun | 2026-05-31 | Off |
+| Mon | 2026-06-01 | T-016 POST /api/discovery + T-017 lead persistence |
+| Tue | 2026-06-02 | T-018 discovery UI (full day) |
+| Wed | 2026-06-03 | T-019 US-2 acceptance + close US-2; D-004 AgDR |
+| Thu | 2026-06-04 | T-020 verification provider + T-021 scoring |
+| Fri | 2026-06-05 | T-022 classification + T-023 lead list (start) |
+| Sat | 2026-06-06 | T-023 finish + buffer |
+| Sun | 2026-06-07 | T-024 US-3 acceptance + close US-3 + Cycle 2 retro |
 
 ---
 
